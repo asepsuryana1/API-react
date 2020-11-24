@@ -3,13 +3,12 @@ var router = express.Router();
 var todo = require('../models/todo')
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    todo.find({}).then((todo) => {
-        res.json(todo)
-    }).catch((err) => {
-        res.send(err)
+router.get('/', function(req, res, next) {
+    todo.find({}, (err, todos)=>{
+      if(err) return res.status(500).json({err})
+      res.status(200).json(todos)
     })
-});
+  });
 
 router.post('/', function (req, res, next) {
     todo.create({

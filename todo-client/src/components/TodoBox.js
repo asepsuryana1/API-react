@@ -5,7 +5,7 @@ import axios from 'axios'
 
 
 const request = axios.create({
-    baseURL: 'https://localhost:3000/api/',
+    baseURL: 'http://localhost:3000/api/',
     timeout: 1000,
     headers: { 'X-Custom-Header': 'foobar' }
 });
@@ -22,8 +22,9 @@ export default class TodoBox extends Component {
 
     componentDidMount() {
         request.get('todos')
-            .then((data) => {
-                this.setState({ data })
+            .then((response) => {
+console.log(response);
+                this.setState({ data: response.data })
             })
             .catch((err) => {
                 alert(err)

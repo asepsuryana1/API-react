@@ -2,16 +2,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
 var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var todosRouter = require('./routes/todos');
 
+var app = express();
 // getting-started.js
-const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/tododb', {useNewUrlParser: true});
 
-var app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
