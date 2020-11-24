@@ -23,7 +23,7 @@ export default class TodoBox extends Component {
     componentDidMount() {
         request.get('todos')
             .then((response) => {
-console.log(response);
+                console.log(response);
                 this.setState({ data: response.data })
             })
             .catch((err) => {
@@ -37,12 +37,26 @@ console.log(response);
         this.setState((state) => ({
             data: [...state.data, todo]
         }));
+        request.post(`todos`, todo)
+            .then((response) => {
+              
+            })
+            .catch((err) => {
+                alert(err)
+            })
 
     }
     deleteTodo(id) {
         this.setState((state) => ({
             data: state.data.filter(item => item.id != id)
         }))
+        request.delete(`todos/${id}`)
+            .then((response) => {
+               
+            })
+            .catch((err) => {
+                alert(err)
+            })
     }
 
     render() {
