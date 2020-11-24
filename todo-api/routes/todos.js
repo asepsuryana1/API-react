@@ -4,8 +4,8 @@ var todo = require('../models/todo')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    todo.find({}).then((todos) => {
-        res.json(todos)
+    todo.find({}).then((todo) => {
+        res.json(todo)
     }).catch((err) => {
         res.send(err)
     })
@@ -13,31 +13,32 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
     todo.create({
-        title: req.body.title
-    }).then((todos) => {
-        res.json(todos)
+        id: req.body.id,
+        task: req.body.task
+    }).then((todo) => {
+        res.json(todo)
     }).catch((err) => {
         res.send(err)
     })
 });
 
 router.put('/:id', function (req, res, next) {
-    todo.findByIdAndUpdate(
-        req.params.id,
+    todo.findOneAndUpdate(
+        {id: parseInt(req.params.id)},
         {
-            title: req.body.title, complete: req.body.complete
+            task: req.body.task, complete: req.body.complete
         }, { new: true}
-        ).then((todos) => {
-            res.json(todos)
+        ).then((todo) => {
+            res.json(todo)
         }).catch((err) => {
             res.send(err)
         })
 });
 router.delete('/:id', function (req, res, next) {
-    todo.findByIdAndRemove(
-        req.params.id
-        ).then((todos) => {
-            res.json(todos)
+    todo.findOneAndRemove(
+        {id:parseInt(req.params.id)}
+        ).then((todo) => {
+            res.json(todo)
         }).catch((err) => {
             res.send(err)
         })

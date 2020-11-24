@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const todoSchema = new mongoose.Schema({
   id: Number,
-  title: String,
+  task: String,
   complete: { type: Boolean, default: false }
 
 });
