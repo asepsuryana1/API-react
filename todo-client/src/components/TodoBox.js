@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 import TodoList from './TodoList'
 import TodoForm from './TodoForm'
+import axios from 'axios'
+
+
+const instance = axios.create({
+    baseURL: 'https://some-domain.com/api/',
+    timeout: 1000,
+    headers: {'X-Custom-Header': 'foobar'}
+  });
 
 
 export default class TodoBox extends Component {
