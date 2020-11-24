@@ -4,8 +4,8 @@ import TodoForm from './TodoForm'
 import axios from 'axios'
 
 
-const instance = axios.create({
-    baseURL: 'https://some-domain.com/api/',
+const request = axios.create({
+    baseURL: 'https://localhost:3000/api/',
     timeout: 1000,
     headers: {'X-Custom-Header': 'foobar'}
   });
@@ -19,6 +19,13 @@ export default class TodoBox extends Component {
         this.addTodo = this.addTodo.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
     }
+
+    componentDidMount(){
+        request.get('todos')
+
+    }
+
+
     addTodo(todo) {
         this.setState((state) => ({
             data: [...state.data, todo] 
