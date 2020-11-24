@@ -7,8 +7,8 @@ import axios from 'axios'
 const request = axios.create({
     baseURL: 'https://localhost:3000/api/',
     timeout: 1000,
-    headers: {'X-Custom-Header': 'foobar'}
-  });
+    headers: { 'X-Custom-Header': 'foobar' }
+});
 
 
 export default class TodoBox extends Component {
@@ -20,22 +20,29 @@ export default class TodoBox extends Component {
         this.deleteTodo = this.deleteTodo.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         request.get('todos')
+            .then((data) => {
+                this.setState({ data })
+            })
+            .catch((err) => {
+                alert(err)
+            })
 
     }
 
 
     addTodo(todo) {
         this.setState((state) => ({
-            data: [...state.data, todo] 
+            data: [...state.data, todo]
         }));
 
     }
     deleteTodo(id) {
         this.setState((state) => ({
             data: state.data.filter(item => item.id != id)
-        }))}
+        }))
+    }
 
     render() {
         return (
